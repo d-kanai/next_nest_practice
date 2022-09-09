@@ -1,0 +1,12 @@
+overwrite: true
+schema: "https://swapi-graphql.netlify.app/.netlify/functions/index"
+documents: "graphql/query/query.ts"
+generates:
+  graphql/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typed-document-node"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

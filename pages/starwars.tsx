@@ -1,24 +1,10 @@
-import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css';
 import Layout from '../components/layout';
+import {AllFilmsDocument} from '../graphql/generated/graphql';
 import { useQuery } from '@apollo/client' 
-import gql from 'graphql-tag';
 
-const GET_ALL_FILMS = gql`
-  query AllFilms($first: Int) {
-    allFilms(first: $first) {
-      edges {
-        node {
-          episodeID
-          title
-        }
-      }
-    }
-  }
-`
-
-export default function Post({ postData }) {
-  const { data, error, loading } = useQuery(GET_ALL_FILMS)
+export default function StarWars({ postData }) {
+  const { data, error, loading } = useQuery(AllFilmsDocument)
   if (loading) return 'loading...';
   console.log(data)
   return (

@@ -5,23 +5,10 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
 import { useQuery } from '@apollo/client' 
-import gql from 'graphql-tag';
-
-const GET_ALL_FILMS = gql`
-  query AllFilms($first: Int) {
-    allFilms(first: $first) {
-      edges {
-        node {
-          episodeID
-          title
-        }
-      }
-    }
-  }
-`
+import {AllFilmsDocument} from '../graphql/generated/graphql';
 
 export default function Home({allPostsData}) {
-  const { data, error, loading } = useQuery(GET_ALL_FILMS)
+  const { data, error, loading } = useQuery(AllFilmsDocument)
   if (loading) return 'loading...';
   console.log(data)
   return (
