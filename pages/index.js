@@ -13,6 +13,7 @@ export default function Home({allPostsData}) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>hello next.js</p>
+        <p>from envvar {process.env.NEXT_PUBLIC_ENV_SAMPLE}</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
