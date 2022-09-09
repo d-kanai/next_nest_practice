@@ -4,8 +4,26 @@ import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
+import { useQuery } from '@apollo/client' 
+import gql from 'graphql-tag';
+
+const GET_ALL_FILMS = gql`
+  query AllFilms($first: Int) {
+    allFilms(first: $first) {
+      edges {
+        node {
+          episodeID
+          title
+        }
+      }
+    }
+  }
+`
 
 export default function Home({allPostsData}) {
+  const { data, error, loading } = useQuery(GET_ALL_FILMS)
+  if (loading) return 'loading...';
+  console.log(data)
   return (
     <Layout home>
       <Head>
@@ -13,6 +31,8 @@ export default function Home({allPostsData}) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>hello next.js</p>
+        <Link href={`/starwars`}>StatWars</Link>
+ 
         <p>from envvar {process.env.NEXT_PUBLIC_ENV_SAMPLE}</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
@@ -34,6 +54,14 @@ export default function Home({allPostsData}) {
             </li>
           ))}
         </ul>
+      </section>
+      <section>
+        <h2 className={utilStyles.headingLg}>Star Wars</h2>
+        {data.allFilms.edges.map(record => (
+          <div key={record.node.episodeID}>
+            <p>Episode{record.node.episodeID} : {record.node.title}</p>
+          </div>
+        ))}
       </section>
     </Layout>
   );
