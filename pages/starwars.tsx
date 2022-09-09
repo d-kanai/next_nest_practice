@@ -22,7 +22,7 @@ export default function Post({ postData }) {
   if (loading) return 'loading...';
   console.log(data)
   return (
-    <Layout>
+    <Layout home={false}> 
       <h2 className={utilStyles.headingLg}>Star Wars</h2>
         {data.allFilms.edges.map(record => (
           <div key={record.node.episodeID}>
