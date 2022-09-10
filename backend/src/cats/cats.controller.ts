@@ -1,6 +1,7 @@
 import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './cats.dto';
 import { CatsService } from './cats.service';
+import { HttpStatus, HttpException } from '@nestjs/common';
 
 @Controller('cats')
 export class CatsController {
@@ -13,6 +14,7 @@ export class CatsController {
 
   @Get()
   findAll(@Query() query: ListAllEntities) {
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return this.catsService.findAll();
   }
 
