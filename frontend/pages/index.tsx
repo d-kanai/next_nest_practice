@@ -5,7 +5,7 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
 import { useQuery } from '@apollo/client' 
-import {AllFilmsDocument, AllFilmsQuery, Film, FilmsEdge} from '../graphql/generated/graphql';
+import { AllFilmsDocument, FilmsEdge } from '../graphql/generated/graphql';
 
 export default function Home({allPostsData}) {
   const { data, error, loading } = useQuery(AllFilmsDocument)
