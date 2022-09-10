@@ -5,7 +5,7 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
 import { useQuery } from '@apollo/client' 
-import {AllFilmsDocument} from '../graphql/generated/graphql';
+import {AllFilmsDocument, AllFilmsQuery, Film, FilmsEdge} from '../graphql/generated/graphql';
 
 export default function Home({allPostsData}) {
   const { data, error, loading } = useQuery(AllFilmsDocument)
@@ -44,9 +44,9 @@ export default function Home({allPostsData}) {
       </section>
       <section>
         <h2 className={utilStyles.headingLg}>Star Wars</h2>
-        {data.allFilms.edges.map(record => (
-          <div key={record.node.episodeID}>
-            <p>Episode{record.node.episodeID} : {record.node.title}</p>
+        {data.allFilms.edges.map((filmsEdge:FilmsEdge) => (
+          <div key={filmsEdge.node.episodeID}>
+            <p>Episode{filmsEdge.node.episodeID} : {filmsEdge.node.title}</p>
           </div>
         ))}
       </section>
