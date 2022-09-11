@@ -1,5 +1,5 @@
 import { MinLength } from 'class-validator';
-import { Int, Field, ArgsType } from '@nestjs/graphql';
+import { InputType, Int, Field, ArgsType } from '@nestjs/graphql';
 
 @ArgsType()
 class PaginationArgs {
@@ -21,4 +21,10 @@ export class GetAuthorArgs extends PaginationArgs {
   @Field({ defaultValue: '' })
   @MinLength(3)
   lastName: string;
+}
+
+@InputType()
+export class UpvotePostInput {
+  @Field()
+  postId: number;
 }

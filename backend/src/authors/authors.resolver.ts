@@ -1,6 +1,6 @@
-import { Resolver, Query, ResolveField, Parent, Args, Int } from "@nestjs/graphql";
+import { Mutation, Resolver, Query, ResolveField, Parent, Args, Int } from "@nestjs/graphql";
 import { Author } from "./models/author.model";
-import { GetAuthorArgs } from "./dtos/get-author.dto";
+import { UpvotePostInput, GetAuthorArgs } from "./dtos/request.dto";
 import { Post } from "../posts/models/post.model";
 
 @Resolver(() => Author)
@@ -10,6 +10,12 @@ export class AuthorsResolver {
     // private postsService: PostsService,
   ) {}
 
+  // mutation{
+  //   upvotePost(upvotePostData:{postId:1}){
+  //     id
+  //     title
+  //   } 
+  // }
   @Query(returns => Author, { name: 'author' })
   async getAuthor(@Args() args: GetAuthorArgs) {
     // return this.authorsService.findOneById(id);
@@ -30,5 +36,20 @@ export class AuthorsResolver {
     post2.title = 'post2'
     return [post1, post2]
     // return this.postsService.findAll({ authorId: id });
+  }
+
+  // mutation{
+  //   upvotePost(upvotePostData:{postId:1}){
+  //     id
+  //     title
+  //   } 
+  // }
+  @Mutation(returns => Post)
+  async upvotePost(@Args('upvotePostData') upvotePostData: UpvotePostInput) {
+    console.log(upvotePostData)
+    const post = new Post();
+    post.id = 1;
+    post.title = 'book'
+    return post;
   }
 }
