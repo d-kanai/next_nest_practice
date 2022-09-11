@@ -12,7 +12,7 @@ async function main() {
   const authors = await prisma.author.findMany()
   console.log(authors)
   console.log(author)
-  const author = await prisma.author.create({
+  const author2 = await prisma.author.create({
     data: {
       firstName: 'daiki',
       lastName: 'kanai',
