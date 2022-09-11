@@ -19,10 +19,10 @@ model Author {
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
+  id Int @id @default(autoincrement())
+  title String
   published Boolean @default(false)
-  author    Author @relation(fields: [authorId], references: [id])
-  authorId  Int
+  author Author @relation(fields: [authorId], references: [id])
+  authorId Int
+  votes Int
 }
