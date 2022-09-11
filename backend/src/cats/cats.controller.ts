@@ -17,9 +17,10 @@ export class CatsController {
     this.catsService.create(createCatDto);
   }
 
+
   @Get()
   @UseGuards(RolesGuard)
-  findAll(@SessionUser() sessionUser: any, @Query() query: ListAllEntities) {
+  findAll(@SessionUser('name') sessionUser: any, @Query() query: ListAllEntities) {
     console.log(sessionUser)
     return this.catsService.findAll()
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);

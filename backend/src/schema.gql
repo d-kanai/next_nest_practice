@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Author {
+  firstName: String
+
+  """Book title"""
+  id: Int! @deprecated(reason: "Not useful in v2 schema")
+  lastName: String
+  posts: [Post!]!
+}
+
+type Post {
+  id: Int!
+  title: String!
+  votes: Int
+}
+
+type Query {
+  author(firstName: String, id: Float!, lastName: String = "", limit: Int = 10, offset: Int = 0): Author!
+}
