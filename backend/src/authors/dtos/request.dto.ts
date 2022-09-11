@@ -1,5 +1,6 @@
 import { MinLength } from 'class-validator';
 import { InputType, Int, Field, ArgsType } from '@nestjs/graphql';
+import { Author } from '../models/author.model';
 
 @ArgsType()
 class PaginationArgs {

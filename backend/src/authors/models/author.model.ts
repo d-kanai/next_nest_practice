@@ -15,5 +15,14 @@ export class Author {
 
 //   @Field(type => [Post], { nullable: 'items' })
   @Field(type => [Post])
-  posts: Post[];
+  posts?: Post[];
+}
+
+
+@ObjectType()
+export class Authors {
+
+  @Field(type => [Author])
+  authors: Author[];
+
 }
