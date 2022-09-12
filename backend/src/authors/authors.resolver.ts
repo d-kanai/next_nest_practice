@@ -11,16 +11,10 @@ export class AuthorsResolver {
     // private postsService: PostsService,
   ) {}
 
-  // mutation{
-  //   upvotePost(upvotePostData:{postId:1}){
-  //     id
-  //     title
-  //   } 
-  // }
   @Query(returns => Authors, { name: 'authors' })
   async getAuthors() {
     const prisma = new PrismaClient()
-    const authors = await prisma.author.findMany()
+    const authors = await prisma.author.findMany({include: {posts: true}})
     console.dir(authors, {depth: null})
     return {"authors": authors}
   }
@@ -35,21 +29,6 @@ export class AuthorsResolver {
     author.lastName = 'kanai'
     console.log(author)
     return author
-  }
-
-  @ResolveField('posts', returns => [Post])
-  async getPosts(@Parent() author: Author) {
-    const prisma = new PrismaClient()
-    const posts = await prisma.post.findMany(
-      {where: {authorId: author.id}}
-    )
-    // const post1 = new Post()
-    // post1.title = 'poaaaaaaaast1'
-    // const post2 =  new Post()
-    // post2.title = 'post2'
-    // return [post1, post2]
-    return posts
-    // return this.postsService.findAll({ authorId: id });
   }
 
   // mutation{
