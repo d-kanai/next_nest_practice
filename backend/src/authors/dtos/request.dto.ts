@@ -1,6 +1,5 @@
-import { MinLength } from 'class-validator';
 import { InputType, Int, Field, ArgsType } from '@nestjs/graphql';
-import { Author } from '../models/author.model';
+import { IsString, IsInt } from 'class-validator';
 
 @ArgsType()
 class PaginationArgs {
@@ -13,19 +12,20 @@ class PaginationArgs {
 
 @ArgsType()
 export class GetAuthorArgs extends PaginationArgs {
-  @Field()
+  @IsInt()
+  @Field(() => Int)
   id: number;
 
   @Field({ nullable: true })
   firstName?: string;
 
   @Field({ defaultValue: '' })
-  @MinLength(3)
   lastName: string;
 }
 
 @InputType()
 export class UpvotePostInput {
+  @IsInt()
   @Field()
   postId: number;
 }

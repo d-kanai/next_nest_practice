@@ -21,12 +21,9 @@ export class AuthorsResolver {
 
   @Query(returns => Author, { name: 'author' })
   async getAuthor(@Args() args: GetAuthorArgs) {
-    // return this.authorsService.findOneById(id);
-    return []
     console.log(args)
-    const author = new Author()
-    author.firstName = 'daiki'
-    author.lastName = 'kanai'
+    const prisma = new PrismaClient()
+    const author = await prisma.author.findUnique({where: {id: args.id}})
     console.log(author)
     return author
   }
@@ -40,9 +37,11 @@ export class AuthorsResolver {
   @Mutation(returns => Post)
   async upvotePost(@Args('upvotePostData') upvotePostData: UpvotePostInput) {
     console.log(upvotePostData)
-    const post = new Post();
-    post.id = 1;
-    post.title = 'book'
+    const prisma = new PrismaClient()
+    const post = await prisma.post.update({
+      where: { id: upvotePostData.postId, },
+      data: { votes: { increment: 1 }, },
+    })
     return post;
   }
 }
