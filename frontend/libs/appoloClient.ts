@@ -20,7 +20,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 const httpLink = new HttpLink({
-  uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index', // Server URL (must be absolute)
+  uri: 'http://localhost:3000/graphql', // Server URL (must be absolute)
+  // uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index', // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 })
 
