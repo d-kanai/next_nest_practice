@@ -2,15 +2,17 @@ import '../styles/global.css';
 import {initializeApollo} from '../libs/appoloClient';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloProvider } from '@apollo/client'
+import { CssBaseline } from '@mui/material';
 
 export default function App({ Component, pageProps }, AppProps) {
     const client = initializeApollo()
     const getLayout = Component.getLayout || ((page) => page)
     return getLayout(
         <ThemeProvider theme={theme}>
-            <ApolloProvider client={client}>
-                <Component {...pageProps} />;
-            </ApolloProvider>
+          <CssBaseline />
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />;
+          </ApolloProvider>
         </ThemeProvider>
 
     )
@@ -168,9 +170,8 @@ export const theme = createTheme({
       disabled: 'rgba(55, 65, 81, 0.26)'
     },
     background: {
-      // default: '#111827',
-      // default: '#F9FAFC',
-      // paper: '#111827'
+      default: '#F9FAFC',
+      paper: 'white'
     },
     divider: '#E6E8F0',
     primary: {
