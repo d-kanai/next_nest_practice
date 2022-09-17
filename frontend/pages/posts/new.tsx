@@ -3,12 +3,16 @@ import Layout from '../../components/layout';
 import { useForm } from "react-hook-form";
 import { useMutation } from '@apollo/client';
 import { CreatePostDocument } from '../../graphql/generated/graphql';
+import { useRouter } from 'next/router'
 
 export default function Posts({ postData }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [ mutate, { data, loading, error }] = useMutation(CreatePostDocument);
+  const router = useRouter()
+
   console.log(data,loading, error)
   if (loading) return 'mutation...';
+  if (data) router.replace('/posts') 
   const onSubmit = (formData) => {
     mutate({ variables: formData });
   }
