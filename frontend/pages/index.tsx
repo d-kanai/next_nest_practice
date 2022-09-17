@@ -27,11 +27,11 @@ TableRow,
 import { useQuery } from '@apollo/client' 
 import { FindManyPostsDocument } from '../graphql/generated/graphql';
 
-export default function Home() {
+const Page = () => {
   const { data, error, loading } = useQuery(FindManyPostsDocument)
   if (loading) return 'loading...'
   return (
-    <Layout home>
+    <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -41,8 +41,6 @@ export default function Home() {
             <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', m: -1 }} >
               <Typography sx={{ m: 1 }} variant="h4" >Posts</Typography>
               <Box sx={{ m: 1 }}>
-                <Button sx={{ mr: 1 }} > Import </Button>
-                <Button sx={{ mr: 1 }} > Export </Button>
                 <Button color="primary" variant="contained" href="/posts/new" > Add Posts </Button>
               </Box>
             </Box>
@@ -89,22 +87,21 @@ export default function Home() {
                   </Table>
                 </Box>
               {/* </PerfectScrollbar> */}
-              <TablePagination
-                component="div"
-                count={1}
-                onPageChange={() => {}}
-                onRowsPerPageChange={() => {}}
-                page={1}
-                rowsPerPage={1}
-                rowsPerPageOptions={[5, 10, 25]}
-              />
+              <TablePagination component="div" count={1} onPageChange={() => {}} onRowsPerPageChange={() => {}} page={1} rowsPerPage={1} rowsPerPageOptions={[5, 10, 25]} />
             </Card>
           </Box>
         </Container>
       </Box>
-    </Layout>
+    </>
   );
 }
+
+Page.getLayout = (page) => (
+  <Layout home>
+    {page}
+  </Layout>
+);
+export default Page;
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();

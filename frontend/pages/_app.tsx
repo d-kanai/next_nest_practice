@@ -5,7 +5,8 @@ import { ApolloProvider } from '@apollo/client'
 
 export default function App({ Component, pageProps }, AppProps) {
     const client = initializeApollo()
-    return (
+    const getLayout = Component.getLayout || ((page) => page)
+    return getLayout(
         <ApolloProvider client={client}>
             <Component {...pageProps} />;
         </ApolloProvider>
