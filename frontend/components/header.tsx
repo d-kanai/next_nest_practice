@@ -1,17 +1,10 @@
 import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
-import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Theme } from '@mui/material/styles';
-
-const DashboardNavbarRoot = styled(AppBar)(( theme:Theme) => ({
-  // backgroundColor: theme.palette.background.paper,
-  // boxShadow: theme.shadows[3]
-}));
 
 export default function Header() {
   return (
-      <DashboardNavbarRoot sx={{ left: { lg: 280 }, width: { lg: 'calc(100% - 280px)' } }} >
+      <AppBar sx={{ boxShadow: 'shadows[3]', bgcolor: 'background.paper', left: { lg: 280 }, width: { lg: 'calc(100% - 280px)' } }} >
         <Toolbar disableGutters sx={{ minHeight: 64, left: 0, px: 2 }} >
           <IconButton onClick={() => {}} sx={{ display: { xs: 'inline-flex', lg: 'none' } }} >
             <MenuIcon fontSize="small" />
@@ -39,6 +32,6 @@ export default function Header() {
           {/* </Avatar> */}
         </Toolbar>
       {/* <AccountPopover anchorEl={settingsRef.current} open={openAccountPopover} onClose={() => setOpenAccountPopover(false)} /> */}
-      </DashboardNavbarRoot>
+      </AppBar>
   );
 }

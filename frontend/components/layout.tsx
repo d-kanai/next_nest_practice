@@ -1,22 +1,18 @@
 import Head from 'next/head';
-import { AppBar } from '@mui/material';
-import styled from '@emotion/styled';
-import styles from './layout.module.css';
 import Link from 'next/link';
-import { Theme } from '@mui/material/styles';
 import Header from './header';
 import { SideBar } from './sidebar';
-
+import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 export const siteTitle = 'Next.js Sample Website';
+import { styled } from '@mui/material/styles';
 
-const DashboardNavbarRoot = styled(AppBar)(( theme:Theme) => ({
-  // backgroundColor: theme.palette.background.paper,
-  // boxShadow: theme.shadows[3]
+const DashboardLayoutRoot = styled('div')(({ theme }) => ({
+  display: 'flex', flex: '1 1 auto', maxWidth: '100%', paddingTop: 64, [theme.breakpoints.up('lg')]: { paddingLeft: 280 }
 }));
 
 export default function Layout({ children, home }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Learn how to build a personal website using Next.js" />
@@ -26,9 +22,13 @@ export default function Layout({ children, home }) {
       </Head>
       <Header/>
       <SideBar/>
-      <main>{children}</main>
+      <DashboardLayoutRoot>
+        <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', width: '100%' }} >
+          <main>{children}</main>
+        </Box>
+      </DashboardLayoutRoot>
       {!home && (
-        <div className={styles.backToHome}>
+        <div>
           <Link href="/">
             <a>← Back to home</a>
           </Link>

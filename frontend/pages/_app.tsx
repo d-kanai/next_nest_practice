@@ -3,20 +3,6 @@ import {initializeApollo} from '../libs/appoloClient';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloProvider } from '@apollo/client'
 
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
-
 export default function App({ Component, pageProps }, AppProps) {
     const client = initializeApollo()
     const getLayout = Component.getLayout || ((page) => page)
@@ -182,8 +168,9 @@ export const theme = createTheme({
       disabled: 'rgba(55, 65, 81, 0.26)'
     },
     background: {
-      default: '#F9FAFC',
-      paper: '#FFFFFF'
+      // default: '#111827',
+      // default: '#F9FAFC',
+      // paper: '#111827'
     },
     divider: '#E6E8F0',
     primary: {

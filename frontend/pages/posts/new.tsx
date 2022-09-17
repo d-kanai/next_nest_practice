@@ -7,7 +7,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CreatePostDocument, FindManyPostsDocument } from '../../graphql/generated/graphql';
 import { useRouter } from 'next/router'
 
-export default function NewPosts() {
+function Page() {
   const [ mutate, { data, loading, error }] = useMutation(CreatePostDocument);
   const { refetch } = useQuery(FindManyPostsDocument)
   const router = useRouter()
@@ -19,10 +19,10 @@ export default function NewPosts() {
      await refetch()
   }
   return (
-    <Layout home={false}> 
+    <>
       <h2 className={utilStyles.headingLg}>New Posts</h2>
       <NewPostsForm onSubmit={onSubmit}/>
-    </Layout>
+    </>
   );
 }
 
@@ -47,3 +47,9 @@ const schema = zod.object({
 type FormData = zod.infer<typeof schema>;
 
 
+Page.getLayout = (page) => (
+  <Layout home={false}>
+    {page}
+  </Layout>
+);
+export default Page;
