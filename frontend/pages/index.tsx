@@ -5,6 +5,7 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
 import {
+  Skeleton,
   Container,
   Box,
   Button,
@@ -29,7 +30,6 @@ import { FindManyPostsDocument } from '../graphql/generated/graphql';
 
 const Page = () => {
   const { data, error, loading } = useQuery(FindManyPostsDocument)
-  if (loading) return 'loading...'
   return (
     <>
       <Head>
@@ -68,7 +68,7 @@ const Page = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.findManyPost.map((post) => (
+                      {!loading ? (data.findManyPost.map((post) => (
                         <TableRow hover key={post.id} >
                           <TableCell padding="checkbox">
                             <Checkbox checked={false} onChange={() => {}} value="true" />
@@ -82,7 +82,14 @@ const Page = () => {
                           </TableCell>
                           <TableCell> {post.votes}</TableCell>
                         </TableRow>
-                      ))}
+                      ))): (
+                        <TableRow>
+                          <TableCell><Skeleton animation="wave" height={50} /></TableCell>
+                          <TableCell><Skeleton variant="text" animation="wave" height={50} /></TableCell>
+                          <TableCell><Skeleton variant="text" animation="wave" height={50} /></TableCell>
+                          <TableCell><Skeleton variant="text" animation="wave" height={50} /></TableCell>
+                        </TableRow>
+                     )}
                     </TableBody>
                   </Table>
                 </Box>
