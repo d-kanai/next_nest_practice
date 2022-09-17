@@ -12,7 +12,7 @@ export default function NewPosts() {
   const { refetch } = useQuery(FindManyPostsDocument)
   const router = useRouter()
   if (loading) return 'mutation...';
-  if (data) router.replace('/posts') 
+  if (data) router.replace('/') 
   const onSubmit = async (formData:FormData) => {
      //@ts-ignore
      await mutate({ variables: formData});

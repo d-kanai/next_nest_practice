@@ -43,7 +43,7 @@ export default function Home() {
               <Box sx={{ m: 1 }}>
                 <Button sx={{ mr: 1 }} > Import </Button>
                 <Button sx={{ mr: 1 }} > Export </Button>
-                <Button color="primary" variant="contained" href="/posts" > Add Posts </Button>
+                <Button color="primary" variant="contained" href="/posts/new" > Add Posts </Button>
               </Box>
             </Box>
             <Box sx={{ mt: 3 }}>
