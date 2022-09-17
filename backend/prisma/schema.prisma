@@ -5,6 +5,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator custom_generator {
+  provider = "nestjs-prisma-graphql-crud-gen"
+  output = "../generated"
+}
+
 datasource db {
   provider = "sqlite"
   url      = "file:dev.sqlite"

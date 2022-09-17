@@ -7,10 +7,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AuthorsResolver } from './authors/authors.resolver';
+import { PostResolver } from 'generated/post/post.resolver';
+import { PostModule } from 'generated/post/post.module';
 
 @Module({
   imports: [
     CatsModule,
+    PostModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -22,7 +25,7 @@ import { AuthorsResolver } from './authors/authors.resolver';
   ],
   providers: [
     AppService,
-    AuthorsResolver
+    // AuthorsResolver,
   ],
 })
 export class AppModule implements NestModule {

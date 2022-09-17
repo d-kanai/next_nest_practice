@@ -9,7 +9,7 @@ import { TimeoutInterceptor } from './common/intercepter/timeout.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalPipes(new ValidationPipe({whitelist: true, transform: true}));
+  app.useGlobalPipes(new ValidationPipe({whitelist: false, transform: true}));
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalInterceptors(new TimeoutInterceptor());
