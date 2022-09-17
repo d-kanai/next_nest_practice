@@ -4,38 +4,104 @@ import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
+import {
+  Container,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  InputAdornment,
+  SvgIcon, Typography
+} from '@mui/material';
+import {
+Avatar,
+Checkbox,
+Table,
+TableBody,
+TableCell,
+TableHead,
+TablePagination,
+TableRow,
+} from '@mui/material';
+import { useQuery } from '@apollo/client' 
+import { FindManyPostsDocument } from '../graphql/generated/graphql';
 
-export default function Home({allPostsData}) {
+export default function Home() {
+  const { data, error, loading } = useQuery(FindManyPostsDocument)
+  if (loading) return 'loading...'
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>hello next.js</p>
-        <p><Link href={`/posts`}>Posts</Link></p>
-        <p>from envvar {process.env.NEXT_PUBLIC_ENV_SAMPLE}</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Box component="main" sx={{ flexGrow: 1, py: 8 }} >
+        <Container maxWidth={false}>
+          <Box>
+            <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', m: -1 }} >
+              <Typography sx={{ m: 1 }} variant="h4" >Posts</Typography>
+              <Box sx={{ m: 1 }}>
+                <Button sx={{ mr: 1 }} > Import </Button>
+                <Button sx={{ mr: 1 }} > Export </Button>
+                <Button color="primary" variant="contained" href="/posts" > Add Posts </Button>
+              </Box>
+            </Box>
+            <Box sx={{ mt: 3 }}>
+              <Card>
+                <CardContent>
+                  <Box sx={{ maxWidth: 1200 }}>
+                    <TextField fullWidth placeholder="Search customer" variant="outlined" />
+                  </Box>
+                </CardContent>
+              </Card>
+            </Box>
+          </Box>
+          <Box sx={{ mt: 3 }}>
+            <Card>
+              {/* <PerfectScrollbar> */}
+                <Box sx={{}}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell padding="checkbox"> <Checkbox onChange={() => {}} /> </TableCell>
+                        <TableCell> ID </TableCell>
+                        <TableCell> Title </TableCell>
+                        <TableCell> Votes </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {data.findManyPost.map((post) => (
+                        <TableRow hover key={post.id} >
+                          <TableCell padding="checkbox">
+                            <Checkbox checked={false} onChange={() => {}} value="true" />
+                          </TableCell>
+                          <TableCell>{post.id}</TableCell>
+                          <TableCell>
+                            <Box sx={{ alignItems: 'center', display: 'flex' }} >
+                              {/* <Avatar src={} sx={{ mr: 2 }} > </Avatar> */}
+                              <Typography color="textPrimary" variant="body1" >{post.title}</Typography>
+                            </Box>
+                          </TableCell>
+                          <TableCell> {post.votes}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </Box>
+              {/* </PerfectScrollbar> */}
+              <TablePagination
+                component="div"
+                count={1}
+                onPageChange={() => {}}
+                onRowsPerPageChange={() => {}}
+                page={1}
+                rowsPerPage={1}
+                rowsPerPageOptions={[5, 10, 25]}
+              />
+            </Card>
+          </Box>
+        </Container>
+      </Box>
     </Layout>
   );
 }

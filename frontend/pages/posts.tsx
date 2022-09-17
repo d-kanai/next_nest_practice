@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Posts({ postData }) {
   const { data, error, loading } = useQuery(FindManyPostsDocument)
-  if (loading) return 'loading...';
+  if (loading) return 'loading...'
   return (
     <Layout home={false}> 
       <h2 className={utilStyles.headingLg}>Posts</h2>
