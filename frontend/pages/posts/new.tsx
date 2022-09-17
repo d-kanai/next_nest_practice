@@ -3,18 +3,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import Layout from '../../components/layout';
 import { useForm } from "react-hook-form";
-import { useMutation } from '@apollo/client';
-import { CreatePostDocument } from '../../graphql/generated/graphql';
+import { useMutation, useQuery } from '@apollo/client';
+import { CreatePostDocument, FindManyPostsDocument } from '../../graphql/generated/graphql';
 import { useRouter } from 'next/router'
 
 export default function NewPosts() {
   const [ mutate, { data, loading, error }] = useMutation(CreatePostDocument);
+  const { refetch } = useQuery(FindManyPostsDocument)
   const router = useRouter()
   if (loading) return 'mutation...';
   if (data) router.replace('/posts') 
   const onSubmit = async (formData:FormData) => {
      //@ts-ignore
      await mutate({ variables: formData});
+     await refetch()
   }
   return (
     <Layout home={false}> 
