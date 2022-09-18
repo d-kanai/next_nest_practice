@@ -2,10 +2,8 @@ import Layout from '../../components/layout';
 import { useMutation, useQuery } from '@apollo/client';
 import { CreatePostDocument, FindManyPostsDocument } from '../../graphql/generated/graphql';
 import { useRouter } from 'next/router'
-import {
-  Grid,
-} from '@mui/material';
-import NewPostsForm, {NewPostFormData} from '../../components/posts/new-post-form';
+import { Grid, Card, CardHeader, Divider } from '@mui/material';
+import NewPostForm, {NewPostFormData} from '../../components/posts/new-post-form';
 
 function Page() {
   const [ mutate, { data, loading, error }] = useMutation(CreatePostDocument);
@@ -22,7 +20,11 @@ function Page() {
     <>
       <Grid container spacing={3} >
         <Grid item md={10} xs={12} >
-          <NewPostsForm onSubmit={onSubmit}/>
+        <Card>
+          <CardHeader subheader="you can post it" title="New Posts" />
+          <Divider />
+          <NewPostForm onSubmit={onSubmit}/>
+        </Card>
         </Grid>
       </Grid>
     </>
