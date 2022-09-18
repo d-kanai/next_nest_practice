@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
-import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../libs/posts';
 import {
   Skeleton,
@@ -12,11 +10,9 @@ import {
   Card,
   CardContent,
   TextField,
-  InputAdornment,
-  SvgIcon, Typography
+  Typography
 } from '@mui/material';
 import {
-Avatar,
 Checkbox,
 Table,
 TableBody,
@@ -41,7 +37,7 @@ const Page = () => {
             <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', m: -1 }} >
               <Typography sx={{ m: 1 }} variant="h4" >Posts</Typography>
               <Box sx={{ m: 1 }}>
-                <Button color="primary" variant="contained" href="/posts/new" > Add Posts </Button>
+                <Link href="/posts/new"><Button color="primary" variant="contained">Add Post</Button></Link>
               </Box>
             </Box>
             <Box sx={{ mt: 3 }}>

@@ -13,13 +13,13 @@ export default function App({ Component, pageProps }, AppProps) {
   const client = initializeApollo()
   const getLayout = Component.getLayout || ((page) => page)
   return (
-    <CacheProvider value={cache}>
+    // <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
         <ApolloProvider client={client}>
           {getLayout(<Component {...pageProps} />)}
         </ApolloProvider>
       </ThemeProvider>
-    </CacheProvider>
+    // </CacheProvider>
   )
 }
