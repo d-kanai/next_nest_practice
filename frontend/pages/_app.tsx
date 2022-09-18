@@ -16,7 +16,7 @@ function Page({ Component, pageProps }) {
   return getLayout(
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client}>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </ApolloProvider>
       </ThemeProvider>
   )
