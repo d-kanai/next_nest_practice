@@ -83,4 +83,3 @@ export class PostResolver {
     return this.postService.deleteMany(args)
   }
 }
-

@@ -14,6 +14,17 @@ type AggregatePost {
   _sum: PostSumAggregate
 }
 
+type Author {
+  _count: AuthorCount
+  firstName: String!
+  id: Int!
+  lastName: String!
+}
+
+type AuthorCount {
+  posts: Int!
+}
+
 input AuthorCreateNestedOneWithoutPostsInput {
   connect: AuthorWhereUniqueInput
   connectOrCreate: AuthorCreateOrConnectWithoutPostsInput
@@ -218,7 +229,9 @@ input NestedStringWithAggregatesFilter {
 }
 
 type Post {
+  author: Author!
   authorId: Int!
+  computedTitle: String!
   id: Int!
   published: Boolean!
   title: String!

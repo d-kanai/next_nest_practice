@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common'
+import { Post } from '../models/post.model'
 import { Prisma } from '@prisma/client'
 import { PrismaService } from '../../prisma.service'
+import PostRepository from './post.repository'
 
 @Injectable()
 export class PostService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService, private postRepository: PostRepository) { }
 
-  async findFirst(args: Prisma.PostFindFirstArgs) {
-    return await this.prisma.post.findFirst(args)
+  async findFirst(args: Prisma.PostFindFirstArgs): Promise<Post> {
+    return await this.postRepository.findFirst(args)
   }
 
   findUnique(args: Prisma.PostFindUniqueArgs) {
