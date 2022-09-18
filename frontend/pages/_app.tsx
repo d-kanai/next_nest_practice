@@ -1,23 +1,25 @@
 import '../styles/global.css';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 import {initializeApollo} from '../libs/appoloClient';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { ApolloProvider } from '@apollo/client'
 import { CssBaseline } from '@mui/material';
 import theme from '../libs/theme'
 
-export default function App({ Component, pageProps }, AppProps) {
-    //MEMO: CssBaseLine must load before 'getLayout'
-    return (<><CssBaseline /><Page Component={Component} pageProps={pageProps}/></>)
-}
+const cache = createCache({ key: 'css' });
 
-function Page({ Component, pageProps }) {
+export default function App({ Component, pageProps }, AppProps) {
   const client = initializeApollo()
   const getLayout = Component.getLayout || ((page) => page)
-  return getLayout(
+  return (
+    <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
+        <CssBaseline/>
         <ApolloProvider client={client}>
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </ApolloProvider>
       </ThemeProvider>
+    </CacheProvider>
   )
 }

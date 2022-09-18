@@ -7,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CreatePostDocument, FindManyPostsDocument } from '../../graphql/generated/graphql';
 import { useRouter } from 'next/router'
 import {
-  Typography,
   Box,
   Button,
   Card,
@@ -43,7 +42,6 @@ function Page() {
 function NewPostsForm(props:{onSubmit: (formData:FormData)=>{}}) {
   const { control, handleSubmit, watch, formState: { errors } } = useForm({defaultValues: {title: '', authorId: ''}, resolver: zodResolver(schema)});
   return (
-    <div>
     <Card>
       <CardHeader subheader="you can post it" title="New Posts" />
       <Divider />
@@ -68,9 +66,9 @@ function NewPostsForm(props:{onSubmit: (formData:FormData)=>{}}) {
         </Box>
       </form>
     </Card>
-  </div>
   );
 }
+
 const schema = zod.object({
   title: zod.string().min(1, { message: "Required" }),
   authorId: zod.string().min(1, { message: "Required" }),
