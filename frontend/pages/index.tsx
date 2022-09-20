@@ -22,15 +22,27 @@ TablePagination,
 TableRow,
 } from '@mui/material';
 import { useQuery } from '@apollo/client' 
+import { useSession, signIn, signOut } from "next-auth/react"
 import { FindManyPostsDocument } from '../graphql/generated/graphql';
 
 const Page = () => {
+  const { data: session } = useSession()
   const { data, error, loading } = useQuery(FindManyPostsDocument)
+  if(!session) {
+    return (<button onClick={() => signIn()}>Sign in</button>)
+  }
+
   return (
     <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <p>SignIn by </p>
+      <p>AccessToken:{session.accessToken}</p>
+      <p>ID:{session.user.id}</p>
+      <p>Email:{session.user.email}</p>
+      <p>Name:{session.user.name}</p>
+      <button onClick={() => signOut()}>Sign out</button>
       <Box component="main" sx={{ flexGrow: 1, py: 8 }} >
         <Container maxWidth={false}>
           <Box>

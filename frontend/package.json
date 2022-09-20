@@ -24,6 +24,7 @@
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "latest",
+    "next-auth": "^4.10.3",
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.35.0",
