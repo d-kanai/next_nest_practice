@@ -1,6 +1,6 @@
 steps:
 - id: 'ls'
-  name: "sh"
+  name: "bash"
   args:
     - "-c"
     - |
