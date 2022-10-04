@@ -1,0 +1,20 @@
+steps:
+- id: 'ls'
+  name: "sh"
+  args:
+    - "-c"
+    - |
+      echo "hello"
+      pwd
+      ls -la
+- id: 'yarn'
+- name: 'gcr.io/cloud-builders/yarn'
+  entrypoint: 'sh'
+  args: ['install']
+    - "-c"
+    - |
+      ls -l
+      cd backend
+      ls -l
+      yarn install
+      yarn jest
