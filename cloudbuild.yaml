@@ -7,14 +7,23 @@ steps:
       echo "hello"
       pwd
       ls -la
-- id: 'yarn'
+- id: 'backend yarn install'
   name: 'gcr.io/cloud-builders/yarn'
   entrypoint: 'sh'
   args:
     - "-c"
     - |
-      ls -l
       cd backend
-      ls -l
       yarn install
-      yarn jest
+- id: 'backend yarn start'
+  name: 'gcr.io/cloud-builders/yarn'
+  entrypoint: 'sh'
+  args:
+    - "-c"
+    - |
+      ls -la
+      cd backend
+      yarn start &
+
+
+
