@@ -24,6 +24,14 @@ steps:
       ls -la
       cd backend
       yarn start &
+- id: 'backend check alive'
+  name: 'gcr.io/cloud-builders/yarn'
+  entrypoint: 'sh'
+  args:
+    - "-c"
+    - |
+      sleep 5
+      curl http://localhost:3000
 
 
 
