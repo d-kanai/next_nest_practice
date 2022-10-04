@@ -10,7 +10,7 @@ steps:
 - id: 'yarn'
   name: 'gcr.io/cloud-builders/yarn'
   entrypoint: 'sh'
-  args: ['install']
+  args:
     - "-c"
     - |
       ls -l
