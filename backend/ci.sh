@@ -1,7 +1,7 @@
 #yarn start &
 while :
 do
-  lsof -i:3000
+  curl -s http://localhost:3000 > /dev/null
   if [ "$?" = "0" ]; then
       echo 'alive!'
       break
