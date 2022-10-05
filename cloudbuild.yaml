@@ -1,12 +1,4 @@
 steps:
-- id: 'ls'
-  name: "bash"
-  args:
-    - "-c"
-    - |
-      echo "hello"
-      pwd
-      ls -la
 - id: 'cypress install'
   name: 'gcr.io/cloud-builders/yarn'
   entrypoint: 'sh'
@@ -14,10 +6,21 @@ steps:
     - "-c"
     - |
       yarn install
+- id: 'cypress image pull'
+  name: cypress/included:10.9.0
+  entrypoint: 'sh'
+  args:
+    - "-c"
+    - |
+      echo "cypress ready"
 - id: 'cypress run'
-  name: cypress/included:8.5.0
-  entrypoint: 'npm'
-  args: ['run', 'ci']
+  name: cypress/included:10.9.0
+  entrypoint: 'sh'
+  args:
+    - "-c"
+    - |
+      yarn cypress run
+
       #- id: 'backend yarn install'
       #  name: 'gcr.io/cloud-builders/yarn'
       #  entrypoint: 'sh'
