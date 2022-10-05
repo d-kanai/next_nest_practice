@@ -1,4 +1,4 @@
-#yarn start &
+yarn start &
 while :
 do
   curl -s http://localhost:3000 > /dev/null
