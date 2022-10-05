@@ -7,21 +7,35 @@ steps:
       echo "hello"
       pwd
       ls -la
-- id: 'backend yarn install'
+- id: 'cypress install'
   name: 'gcr.io/cloud-builders/yarn'
   entrypoint: 'sh'
   args:
     - "-c"
     - |
-      cd backend
       yarn install
-- id: 'backend yarn start'
+- id: 'cypress run'
   name: 'gcr.io/cloud-builders/yarn'
   entrypoint: 'sh'
   args:
     - "-c"
     - |
-      ls -la
-      cd backend
-      sh ci.sh
+      yarn cypress run
+      #- id: 'backend yarn install'
+      #  name: 'gcr.io/cloud-builders/yarn'
+      #  entrypoint: 'sh'
+      #  args:
+      #    - "-c"
+      #    - |
+      #      cd backend
+      #      yarn install
+      #- id: 'backend yarn start'
+      #  name: 'gcr.io/cloud-builders/yarn'
+      #  entrypoint: 'sh'
+      #  args:
+      #    - "-c"
+      #    - |
+      #      ls -la
+      #      cd backend
+      #      sh ci.sh
 

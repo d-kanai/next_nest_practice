@@ -1,0 +1,11 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:d-kanai/next_nest_practice.git",
+  "author": "d.kanai <contact@dkanai.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "^10.9.0"
+  }
+}
