@@ -15,12 +15,9 @@ steps:
     - |
       yarn install
 - id: 'cypress run'
-  name: 'gcr.io/cloud-builders/yarn'
-  entrypoint: 'sh'
-  args:
-    - "-c"
-    - |
-      yarn cypress run
+  name: cypress/included:8.5.0
+  entrypoint: 'npm'
+  args: ['run', 'ci']
       #- id: 'backend yarn install'
       #  name: 'gcr.io/cloud-builders/yarn'
       #  entrypoint: 'sh'
